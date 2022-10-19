@@ -50,7 +50,7 @@ public class Main {
                 rand = random.nextInt(4);
 
                 if(rand == 0) {
-                    grid[x][y].setBackground(Color.blue);
+                    grid[x][y].setBackground(Color.black);
                 } else if(rand == 1) {
                     grid[x][y].setBackground(Color.red);
                 } else if(rand == 2) {

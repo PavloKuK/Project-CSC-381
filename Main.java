@@ -55,7 +55,7 @@ public class Main {
                     grid[x][y].setBackground(Color.red);
                 } else if(rand == 2) {
                     grid[x][y].setBackground(Color.gray);
-                } else if(rand == 3) {
+                } else {
                     grid[x][y].setBackground(Color.white);
                 }
             }

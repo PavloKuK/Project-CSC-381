@@ -11,7 +11,7 @@ import java.awt.GridLayout; //imports GridLayout library
 
 public class Main {
 
-    static JFrame frame = new JFrame(); // creates frame
+    static JFrame frame = new JFrame("Sprint 1"); // creates frame
     static JButton[][] grid; // names the grid of buttons
 
     static Random random = new Random();
@@ -44,7 +44,7 @@ public class Main {
     public static void main(String[] args) {
 
         Grid(50, 50);
-        
+
         int black = 0;
         int red = 0;
         int gray = 0;
@@ -64,8 +64,20 @@ public class Main {
             }
         }
 
-        System.out.println(black + "\n" + red + "\n" + gray + "\n" + white);
+        double blackPopulation = (double) black / 2500 * 100;
+        double redPopulation = (double) red / 2500 * 100;
+        double grayPopulation = (double) gray / 2500 * 100;
+        double whitePopulation = (double) white / 2500 * 100;
 
+        System.out.println(blackPopulation + "\n" +
+                redPopulation + "\n" +
+                grayPopulation + "\n" +
+                whitePopulation + "\n\n\n");
+
+        System.out.println("Black population: " + black + "\n"
+                + "Red population: " + red + "\n"
+                + "Gray population: " + gray + "\n"
+                + "White population: " + white);
     }
 }
 

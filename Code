@@ -1,0 +1,91 @@
+import java.awt.*;
+
+import javax.swing.*;
+import java.awt.Color;
+import java.awt.GridLayout; //imports GridLayout library
+import java.util.Random;
+import java.awt.FlowLayout;
+
+
+public class Main {
+    static JFrame frame = new JFrame(); // creates frame
+    static JButton[][] grid; // names the grid of buttons
+
+    static Random random = new Random();
+
+    public static Component Grid(int width, int length) { // constructor
+        frame.setLayout(new GridLayout(width, length)); // set layout
+        grid = new JButton[width][length]; // allocate the size of grid
+        int rand;
+        for (int y = 0; y < length; y++) {
+            for (int x = 0; x < width; x++) {
+                grid[x][y] = new JButton(); // creates new button
+                frame.add(grid[x][y]); // adds button to grid
+
+                rand = random.nextInt(4);
+
+                switch (rand) {
+                    case 0 -> grid[x][y].setBackground(Color.black);
+                    case 1 -> grid[x][y].setBackground(Color.red);
+                    case 2 -> grid[x][y].setBackground(Color.gray);
+                    case 3 -> grid[x][y].setBackground(Color.white);
+                }
+            }
+
+        }
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack(); // sets appropriate size for frame
+        frame.setVisible(true); // makes frame visible
+        return null;
+    }
+
+    public static void main(String[] args) {
+        //creates frame
+        JFrame frame = new JFrame("Sprint 1");
+        frame.setBounds(100, 100, 645, 470);
+        JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout());
+
+        //creates label for width & text field and adds to panel
+        JLabel widthLabel = new JLabel("Enter width for grid: ");
+        JTextField widthField = new JTextField(10);
+        panel.add(widthLabel);
+        panel.add(widthField);
+
+        //creates label for width & text field and adds to panel
+        JLabel heightLabel = new JLabel("Enter height for grid: ");
+        JTextField heightField = new JTextField(10);
+        panel.add(heightLabel);
+        panel.add(heightField);
+
+
+        //creates stop button
+        JButton stopButton = new JButton();
+        stopButton.setText("Stop");
+        stopButton.addActionListener(e -> {
+            frame.dispose();
+        });
+        panel.add(stopButton);
+
+
+        //creates submit button
+        JButton submitButton = new JButton("Submit");
+        submitButton.addActionListener(e -> {
+            //gets text
+            String width = widthField.getText();
+            String height = heightField.getText();
+            //creates grid
+            Grid(Integer.parseInt(width), Integer.parseInt(height));
+        });
+        panel.add(submitButton);
+
+        //adds a panel to the frame
+        frame.add(panel);
+
+        //displays frame
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+
+    }
+}

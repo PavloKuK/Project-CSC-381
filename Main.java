@@ -54,14 +54,22 @@ public class Main {
 
                     rand = random.nextInt(4);
 
-                    if(rand == 0) {
-                        grid[x][y].setBackground(Color.black);
-                    } else if(rand == 1) {
-                        grid[x][y].setBackground(Color.red);
-                    } else if(rand == 2) {
-                        grid[x][y].setBackground(Color.gray);
-                    } else {
-                        grid[x][y].setBackground(Color.white);
+                    switch (rand) {
+                        case 0:
+                            grid[x][y].setBackground(Color.black);
+                            break;
+
+                        case 1:
+                            grid[x][y].setBackground(Color.red);
+                            break;
+
+                        case 2:
+                            grid[x][y].setBackground(Color.gray);
+                            break;
+
+                        case 3:
+                            grid[x][y].setBackground(Color.white);
+                            break;
                     }
                 }
 

@@ -4,28 +4,6 @@ import javax.swing.JPanel;
 import java.awt.GridLayout;
 import java.awt.Color;
 import java.util.Random;
-
-//public class Main {
-//
-//    public static void main(String[] args) {
-//
-//
-//        JFrame jf = new JFrame("Example");
-//        JPanel p = new JPanel();
-//
-//        jf.setLayout(new GridLayout(10, 10));
-//
-//        for(int i = 1; i <= 100; i++) {
-//            jf.add(new JButton(""));
-//        }
-//
-//        jf.setBackground(Color.black);
-//
-//        jf.setSize(400,400);
-//        jf.setVisible(true);
-//    }
-//}
-
 import javax.swing.JFrame; //imports JFrame library
 import javax.swing.JButton; //imports JButton library
 import java.awt.Color;
@@ -33,50 +11,39 @@ import java.awt.GridLayout; //imports GridLayout library
 
 public class Main {
 
-    public static void main(String[] args) {
-        new Grid(50, 50);// makes new ButtonGrid with 2 parameters
+    static JFrame frame = new JFrame(); // creates frame
+    static JButton[][] grid; // names the grid of buttons
+
+    static Random random = new Random();
+
+    public static void Grid(int width, int length) { // constructor
+        frame.setLayout(new GridLayout(width, length)); // set layout
+        grid = new JButton[width][length]; // allocate the size of grid
+        int rand;
+        for (int y = 0; y < length; y++) {
+            for (int x = 0; x < width; x++) {
+                grid[x][y] = new JButton(); // creates new button
+                frame.add(grid[x][y]); // adds button to grid
+
+                rand = random.nextInt(4);
+
+                switch (rand) {
+                    case 0 -> grid[x][y].setBackground(Color.black);
+                    case 1 -> grid[x][y].setBackground(Color.red);
+                    case 2 -> grid[x][y].setBackground(Color.gray);
+                    case 3 -> grid[x][y].setBackground(Color.white);
+                }
+            }
+
+        }
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack(); // sets appropriate size for frame
+        frame.setVisible(true); // makes frame visible
     }
 
-    public static class Grid {
-        JFrame frame = new JFrame(); // creates frame
-        JButton[][] grid; // names the grid of buttons
+    public static void main(String[] args) {
 
-        Random random = new Random();
+        Grid(50, 50);
 
-        public Grid(int width, int length) { // constructor
-            frame.setLayout(new GridLayout(width, length)); // set layout
-            grid = new JButton[width][length]; // allocate the size of grid
-            int rand;
-            for (int y = 0; y < length; y++) {
-                for (int x = 0; x < width; x++) {
-                    grid[x][y] = new JButton(); // creates new button
-                    frame.add(grid[x][y]); // adds button to grid
-
-                    rand = random.nextInt(4);
-
-                    switch (rand) {
-                        case 0:
-                            grid[x][y].setBackground(Color.black);
-                            break;
-
-                        case 1:
-                            grid[x][y].setBackground(Color.red);
-                            break;
-
-                        case 2:
-                            grid[x][y].setBackground(Color.gray);
-                            break;
-
-                        case 3:
-                            grid[x][y].setBackground(Color.white);
-                            break;
-                    }
-                }
-
-            }
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.pack(); // sets appropriate size for frame
-            frame.setVisible(true); // makes frame visible
-        }
     }
 }

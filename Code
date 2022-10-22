@@ -25,11 +25,22 @@ public class Main {
                 rand = random.nextInt(4);
 
                 switch (rand) {
-                    case 0 -> grid[x][y].setBackground(Color.black);
-                    case 1 -> grid[x][y].setBackground(Color.red);
-                    case 2 -> grid[x][y].setBackground(Color.gray);
-                    case 3 -> grid[x][y].setBackground(Color.white);
+                    case 0:
+                        grid[x][y].setBackground(Color.black);
+                        break;
+
+                    case 1:
+                        grid[x][y].setBackground(Color.red);
+                        break;
+
+                    case 2:
+                        grid[x][y].setBackground(Color.gray);
+                        break;
+                    case 3:
+                        grid[x][y].setBackground(Color.white);
+                        break;
                 }
+
             }
 
         }

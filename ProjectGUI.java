@@ -120,7 +120,7 @@ public class ProjectGUI extends JFrame{
         stopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.dispose();
+                System.exit(0);
             }
         });
         giantsTextField.addKeyListener(new KeyAdapter() {

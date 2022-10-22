@@ -85,8 +85,19 @@ public class Main {
             //gets text
             String width = widthField.getText();
             String height = heightField.getText();
-            //creates grid
-            Grid(Integer.parseInt(width), Integer.parseInt(height));
+            
+            //Converts width and height from string to int
+            int Width;
+            int Height;
+            try {
+                Width = Integer.parseInt(width);
+                Height = Integer.parseInt(height);
+                //Creates Grid
+                Grid(Width, Height);
+            } catch (Exception E) {
+                System.out.println("Got an exception");
+            }
+            
         });
         panel.add(submitButton);
 

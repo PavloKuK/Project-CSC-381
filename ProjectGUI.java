@@ -121,20 +121,20 @@ public class ProjectGUI extends JFrame {
                         cowboysresultsLabel.setText("Please enter a number between 1 and 99");
                     }
                     if (cowboyspop.isEmpty()) {
-                        System.out.println("Cowboys not selected");;
+                        cowboysresultsLabel.setText("Cowboys fans population density is: ");
                     }
                     else {
-                        cowboysresultsLabel.setText("Giants fans population density is: " + cowboyspop);
+                        cowboysresultsLabel.setText("Cowboys fans population density is: " + cowboyspop);
                     }
                     // commanders
                     if (commandint < 1 || commandint > 99) {
                         commandersresultsLabel.setText("Please enter a number between 1 and 99");
                     }
                     if (commandpop.isEmpty()) {
-                        System.out.println("Commanders not selected");
+                        commandersresultsLabel.setText("Commanders fans population density is: ");
                     }
                     else {
-                        commandersresultsLabel.setText("Giants fans population density is: " + commandpop);
+                        commandersresultsLabel.setText("Commanders fans population density is: " + commandpop);
                     }
                     // grid
                     int Width;

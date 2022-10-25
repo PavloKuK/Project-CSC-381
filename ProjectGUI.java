@@ -69,7 +69,8 @@ public class ProjectGUI extends JFrame {
         private JLabel commandersresultsLabel;
         private JLabel cowboysLabel;
         private JLabel commandersLabel;
-
+    private JLabel widthresultsLabel;
+    private JLabel heightsresultsLabel;
 
 
     public ProjectGUI(String title) {
@@ -101,6 +102,8 @@ public class ProjectGUI extends JFrame {
                     int giantsint = Integer.parseInt(giantspop);
                     int cowboysint = Integer.parseInt(cowboyspop);
                     int commandint = Integer.parseInt(commandpop);
+                    int widthint = Integer.parseInt(width);
+                    int heightint = Integer.parseInt(height);
 
                     // eagles
                     if (eaglesint < 1 || eaglesint > 99) {
@@ -137,23 +140,23 @@ public class ProjectGUI extends JFrame {
                         commandersresultsLabel.setText("Commanders fans population density is: " + commandpop);
                     }
                     //width
-                   if (widthInputLabel < 1 || widthInputLabel > 100){
-                    widthResultsLabel.setText("Please enter a number between 1 and 100");
-                    widthResultsLabel.setVisible(true);
-                       }
-                else {
-                    widthResultsLabel.setText("Width input is: " + width);
-                    widthResultsLabel.setVisible(true);
-                }
-                //height
-                if (heightInputLabel < 1 || heightInputLabel > 100){
-                    heightResultsLabel.setText("Please enter a number between 1 and 100");
-                    heightResultsLabel.setVisible(true);
-                }
-                else {
-                    heightResultsLabel.setText("Height input is: " + height);
-                    heightResultsLabel.setVisible(true);
-                }
+                    if (widthint < 1 || widthint > 100){
+                        widthresultsLabel.setText("Please enter a number between 1 and 100");
+                        widthresultsLabel.setVisible(true);
+                    }
+                    else {
+                        widthresultsLabel.setText("Width input is: " + width);
+                        widthresultsLabel.setVisible(true);
+                    }
+                    //height
+                    if (heightint < 1 || heightint > 100){
+                        heightsresultsLabel.setText("Please enter a number between 1 and 100");
+                        heightsresultsLabel.setVisible(true);
+                    }
+                    else {
+                        heightsresultsLabel.setText("Height input is: " + height);
+                        heightsresultsLabel.setVisible(true);
+                    }
                     // grid
                     int Width;
                     int Height;

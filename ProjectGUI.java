@@ -136,6 +136,24 @@ public class ProjectGUI extends JFrame {
                     else {
                         commandersresultsLabel.setText("Commanders fans population density is: " + commandpop);
                     }
+                    //width
+                   if (widthInputLabel < 1 || widthInputLabel > 100){
+                    widthResultsLabel.setText("Please enter a number between 1 and 100");
+                    widthResultsLabel.setVisible(true);
+                       }
+                else {
+                    widthResultsLabel.setText("Width input is: " + width);
+                    widthResultsLabel.setVisible(true);
+                }
+                //height
+                if (heightInputLabel < 1 || heightInputLabel > 100){
+                    heightResultsLabel.setText("Please enter a number between 1 and 100");
+                    heightResultsLabel.setVisible(true);
+                }
+                else {
+                    heightResultsLabel.setText("Height input is: " + height);
+                    heightResultsLabel.setVisible(true);
+                }
                     // grid
                     int Width;
                     int Height;

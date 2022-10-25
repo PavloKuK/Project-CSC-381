@@ -12,7 +12,17 @@ public class ProjectGUI extends JFrame {
 
         static Random random = new Random();
 
-        public static Component Grid(int width, int length) { // constructor
+        String eaglespop;
+        String giantspop;
+        String cowboyspop;
+        String commandpop;
+
+        int eaglesint;
+        int giantsint;
+        int cowboysint;
+        int commandint;
+
+        public Component Grid(int width, int length) { // constructor
             frame.setLayout(new GridLayout(width, length)); // set layout
             grid = new JButton[width][length]; // allocate the size of grid
             int rand;
@@ -21,23 +31,19 @@ public class ProjectGUI extends JFrame {
                     grid[x][y] = new JButton(); // creates new button
                     frame.add(grid[x][y]); // adds button to grid
 
-                    rand = random.nextInt(4);
+                    rand = random.nextInt(100);
 
-                    switch (rand) {
-                        case 0:
-                            grid[x][y].setBackground(Color.black);
-                            break;
+                    if ((0 < rand) && (rand < eaglesint)) {
+                        grid[x][y].setBackground(Color.green);
 
-                        case 1:
-                            grid[x][y].setBackground(Color.red);
-                            break;
+                    } else if ((eaglesint < rand) && (rand < eaglesint + giantsint)) {
+                        grid[x][y].setBackground(Color.black);
 
-                        case 2:
-                            grid[x][y].setBackground(Color.gray);
-                            break;
-                        case 3:
-                            grid[x][y].setBackground(Color.white);
-                            break;
+                    } else if ((eaglesint < rand) && (rand < eaglesint + giantsint + cowboysint)) {
+                        grid[x][y].setBackground(Color.red);
+
+                    } else if ((eaglesint < rand) && (rand < eaglesint + giantsint + cowboysint + commandint)) {
+                        grid[x][y].setBackground(Color.blue);
                     }
 
                 }
@@ -69,8 +75,7 @@ public class ProjectGUI extends JFrame {
         private JLabel commandersresultsLabel;
         private JLabel cowboysLabel;
         private JLabel commandersLabel;
-    private JLabel widthresultsLabel;
-    private JLabel heightsresultsLabel;
+
 
 
     public ProjectGUI(String title) {
@@ -91,19 +96,17 @@ public class ProjectGUI extends JFrame {
             submitButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    String eaglespop = eaglesTextField.getText().trim();
-                    String giantspop = giantsTextField.getText().trim();
-                    String cowboyspop = cowboysTextField.getText().trim();
-                    String commandpop = commandersTextField.getText().trim();
+                    eaglespop = eaglesTextField.getText().trim();
+                    giantspop = giantsTextField.getText().trim();
+                    cowboyspop = cowboysTextField.getText().trim();
+                    commandpop = commandersTextField.getText().trim();
                     String width = widthInput.getText().trim();
                     String height = heightInput.getText().trim();
 
-                    int eaglesint = Integer.parseInt(eaglespop);
-                    int giantsint = Integer.parseInt(giantspop);
-                    int cowboysint = Integer.parseInt(cowboyspop);
-                    int commandint = Integer.parseInt(commandpop);
-                    int widthint = Integer.parseInt(width);
-                    int heightint = Integer.parseInt(height);
+                    eaglesint = Integer.parseInt(eaglespop);
+                    giantsint = Integer.parseInt(giantspop);
+                    cowboysint = Integer.parseInt(cowboyspop);
+                    commandint = Integer.parseInt(commandpop);
 
                     // eagles
                     if (eaglesint < 1 || eaglesint > 99) {
@@ -138,24 +141,6 @@ public class ProjectGUI extends JFrame {
                     }
                     else {
                         commandersresultsLabel.setText("Commanders fans population density is: " + commandpop);
-                    }
-                    //width
-                    if (widthint < 1 || widthint > 100){
-                        widthresultsLabel.setText("Please enter a number between 1 and 100");
-                        widthresultsLabel.setVisible(true);
-                    }
-                    else {
-                        widthresultsLabel.setText("Width input is: " + width);
-                        widthresultsLabel.setVisible(true);
-                    }
-                    //height
-                    if (heightint < 1 || heightint > 100){
-                        heightsresultsLabel.setText("Please enter a number between 1 and 100");
-                        heightsresultsLabel.setVisible(true);
-                    }
-                    else {
-                        heightsresultsLabel.setText("Height input is: " + height);
-                        heightsresultsLabel.setVisible(true);
                     }
                     // grid
                     int Width;

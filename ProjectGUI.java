@@ -6,7 +6,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 
-public class ProjectGUI extends JFrame {
+public class Main extends JFrame {
     static JFrame frame = new JFrame(); // creates frame
     static JButton[][] grid; // names the grid of buttons
 
@@ -17,12 +17,12 @@ public class ProjectGUI extends JFrame {
     String cowboyspop;
     String commandpop;
 
-    int eaglesint;
-    int giantsint;
-    int cowboysint;
-    int commandint;
+    int eaglesint = 0;
+    int giantsint = 0;
+    int cowboysint = 0;
+    int commandint = 0;
 
-    public Component Grid(int width, int length) { // constructor
+    public void Grid(int width, int length) { // constructor
         frame.setLayout(new GridLayout(width, length)); // set layout
         grid = new JButton[width][length]; // allocate the size of grid
         int rand;
@@ -52,7 +52,6 @@ public class ProjectGUI extends JFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack(); // sets appropriate size for frame
         frame.setVisible(true); // makes frame visible
-        return null;
     }
     private JPanel mainPanel;
     private JTextField eaglesTextField;
@@ -79,7 +78,7 @@ public class ProjectGUI extends JFrame {
     private JLabel widthresultsLabel;
 
 
-    public ProjectGUI(String title) {
+    public Main(String title) {
         super(title);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -97,19 +96,21 @@ public class ProjectGUI extends JFrame {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String width = widthInput.getText().trim();
+                String height = heightInput.getText().trim();
+
                 eaglespop = eaglesTextField.getText().trim();
                 giantspop = giantsTextField.getText().trim();
                 cowboyspop = cowboysTextField.getText().trim();
                 commandpop = commandersTextField.getText().trim();
-                String width = widthInput.getText().trim();
-                String height = heightInput.getText().trim();
 
                 eaglesint = Integer.parseInt(eaglespop);
                 giantsint = Integer.parseInt(giantspop);
                 cowboysint = Integer.parseInt(cowboyspop);
                 commandint = Integer.parseInt(commandpop);
-                int widthint = Integer.parseInt(width);
-                int heightint = Integer.parseInt(height);
+
+                int widthInt = Integer.parseInt(width);
+                int heightInt = Integer.parseInt(height);
 
                 // eagles
                 if (eaglesint < 1 || eaglesint > 99) {
@@ -140,7 +141,7 @@ public class ProjectGUI extends JFrame {
                     commandersresultsLabel.setText("Commanders fans population density is: " + commandpop);
                 }
                 //width
-                if (widthint < 1 || widthint > 100){
+                if (widthInt < 1 || widthInt > 100){
                     widthresultsLabel.setText("Please enter a number between 1 and 100");
                     widthresultsLabel.setVisible(true);
                 }
@@ -149,7 +150,7 @@ public class ProjectGUI extends JFrame {
                     widthresultsLabel.setVisible(true);
                 }
                 //height
-                if (heightint < 1 || heightint > 100){
+                if (heightInt < 1 || heightInt > 100){
                     heightsresultsLabel.setText("Please enter a number between 1 and 100");
                     heightsresultsLabel.setVisible(true);
                 }
@@ -292,7 +293,7 @@ public class ProjectGUI extends JFrame {
     }
 
     public static void main(String[] args) {
-        JFrame frame = new ProjectGUI("Sprint 1");
+        JFrame frame = new Main("Sprint 1");
         frame.setVisible(true);
     }
 }

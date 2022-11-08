@@ -6,10 +6,12 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 
-public class Main extends JFrame {
+public class ProjectGUI extends JFrame {
     static JFrame frame = new JFrame(); // creates frame
     static JButton[][] grid; // names the grid of buttons
 
+    static int Width;
+    static int Height;
     static Random random = new Random();
 
     String eaglespop;
@@ -17,16 +19,90 @@ public class Main extends JFrame {
     String cowboyspop;
     String commandpop;
 
-    int eaglesint = 0;
-    int giantsint = 0;
-    int cowboysint = 0;
-    int commandint = 0;
+    int eaglesint;
+    int giantsint;
+    int cowboysint;
+    int commandint;
 
-    public void Grid(int width, int length) { // constructor
-        frame.setLayout(new GridLayout(width, length)); // set layout
-        grid = new JButton[width][length]; // allocate the size of grid
+    static int empty;
+
+    public static void emptySpotList() {
+
+        for (int width = 0; width < Width; width++) {
+            for (int height = 0; height < Height; height++) {
+                if (grid[width][height].getBackground() == null) {
+
+                }
+            }
+        }
+    }
+
+    public Component checkNeighbors(int width, int height) {
+
+        int friends = 0;
+        int enemies = 0;
+
+        if (grid[width+1][height].getBackground() != null) {
+            if (grid[width][height].getBackground() == grid[width+1][height].getBackground()) {
+                friends++;
+            } else enemies++;
+        }
+
+        if (grid[width+1][height-1].getBackground() != null) {
+            if (grid[width][height].getBackground() == grid[width+1][height-1].getBackground()) {
+                friends++;
+            } else enemies++;
+        }
+
+        if (grid[width][height-1].getBackground() != null) {
+            if (grid[width][height].getBackground() == grid[width][height-1].getBackground()) {
+                friends++;
+            } else enemies++;
+        }
+
+        if (grid[width-1][height-1].getBackground() != null) {
+            if (grid[width][height].getBackground() == grid[width-1][height-1].getBackground()) {
+                friends++;
+            } else enemies++;
+        }
+
+        if (grid[width-1][height].getBackground() != null) {
+            if (grid[width][height].getBackground() == grid[width-1][height].getBackground()) {
+                friends++;
+            } else enemies++;
+        }
+
+        if (grid[width-1][height+1].getBackground() != null) {
+            if (grid[width][height].getBackground() == grid[width-1][height+1].getBackground()) {
+                friends++;
+            } else enemies++;
+        }
+
+        if (grid[width][height+1].getBackground() != null) {
+            if (grid[width][height].getBackground() == grid[width][height+1].getBackground()) {
+                friends++;
+            } else enemies++;
+        }
+
+        if (grid[width+1][height+1].getBackground() != null) {
+            if (grid[width][height].getBackground() == grid[width+1][height+1].getBackground()) {
+                friends++;
+            } else enemies++;
+        }
+
+
+        System.out.println("Friends: " + friends + "\n" +
+                "Enemies: " + enemies);
+
+        return null;
+    }
+
+    public Component Grid(int width, int height) { // constructor
+        frame.setLayout(new GridLayout(width, height)); // set layout
+        frame.setBounds(350, 250, 250, 500);
+        grid = new JButton[width][height]; // allocate the size of grid
         int rand;
-        for (int y = 0; y < length; y++) {
+        for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 grid[x][y] = new JButton(); // creates new button
                 frame.add(grid[x][y]); // adds button to grid
@@ -52,7 +128,9 @@ public class Main extends JFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack(); // sets appropriate size for frame
         frame.setVisible(true); // makes frame visible
+        return null;
     }
+
     private JPanel mainPanel;
     private JTextField eaglesTextField;
     private JTextField giantsTextField;
@@ -76,9 +154,21 @@ public class Main extends JFrame {
     private JLabel commandersLabel;
     private JLabel heightsresultsLabel;
     private JLabel widthresultsLabel;
+    private JCheckBox universaltoleranceCheckBox;
+    private JLabel universaltoleranceLabel;
+    private JTextField eaglestoleranceTextField;
+    private JLabel eaglestoleranceLabel;
+    private JTextField cowboystoleranceTextfield;
+    private JLabel cowboystoleranceLabel;
+    private JTextField giantstoleranceTextField;
+    private JTextField commandtoleranceTextField;
+    private JLabel giantstoleranceLabel;
+    private JLabel commandtoleranceLabel;
+    private JTextField universaltoleranceTextField;
+    private JCheckBox individualCheckbox;
 
 
-    public Main(String title) {
+    public ProjectGUI(String title) {
         super(title);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -93,24 +183,31 @@ public class Main extends JFrame {
         commandersLabel.setVisible(false);
         commandersresultsLabel.setVisible(false);
 
+        universaltoleranceTextField.setVisible(false);
+        universaltoleranceLabel.setVisible(false);
+
+        cowboystoleranceTextfield.setVisible(false);
+        cowboystoleranceLabel.setVisible(false);
+
+        commandtoleranceTextField.setVisible(false);
+        commandtoleranceLabel.setVisible(false);
+
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String width = widthInput.getText().trim();
-                String height = heightInput.getText().trim();
-
                 eaglespop = eaglesTextField.getText().trim();
                 giantspop = giantsTextField.getText().trim();
                 cowboyspop = cowboysTextField.getText().trim();
                 commandpop = commandersTextField.getText().trim();
+                String width = widthInput.getText().trim();
+                String height = heightInput.getText().trim();
 
                 eaglesint = Integer.parseInt(eaglespop);
                 giantsint = Integer.parseInt(giantspop);
                 cowboysint = Integer.parseInt(cowboyspop);
                 commandint = Integer.parseInt(commandpop);
-
-                int widthInt = Integer.parseInt(width);
-                int heightInt = Integer.parseInt(height);
+                int widthint = Integer.parseInt(width);
+                int heightint = Integer.parseInt(height);
 
                 // eagles
                 if (eaglesint < 1 || eaglesint > 99) {
@@ -141,7 +238,7 @@ public class Main extends JFrame {
                     commandersresultsLabel.setText("Commanders fans population density is: " + commandpop);
                 }
                 //width
-                if (widthInt < 1 || widthInt > 100){
+                if (widthint < 1 || widthint > 100){
                     widthresultsLabel.setText("Please enter a number between 1 and 100");
                     widthresultsLabel.setVisible(true);
                 }
@@ -150,7 +247,7 @@ public class Main extends JFrame {
                     widthresultsLabel.setVisible(true);
                 }
                 //height
-                if (heightInt < 1 || heightInt > 100){
+                if (heightint < 1 || heightint > 100){
                     heightsresultsLabel.setText("Please enter a number between 1 and 100");
                     heightsresultsLabel.setVisible(true);
                 }
@@ -159,8 +256,6 @@ public class Main extends JFrame {
                     heightsresultsLabel.setVisible(true);
                 }
                 // grid
-                int Width;
-                int Height;
                 try {
                     Width = Integer.parseInt(width);
                     Height = Integer.parseInt(height);
@@ -169,6 +264,49 @@ public class Main extends JFrame {
                 } catch (Exception E) {
                     System.out.println("Got an exception");
                 }
+
+                int eaglesPopulation = 0;
+                int giantsPopulation = 0;
+                int cowboysPopulation = 0;
+                int commandersPopulation = 0;
+
+                double eaglePercent = 0;
+                double giantPercent = 0;
+                double cowboysPercent = 0;
+                double commandersPercent = 0;
+
+                for (int h = 0; h < Height; h++) {
+                    for (int w = 0; w < Width; w++) {
+                        if(grid[w][h].getBackground() == Color.green) {
+                            eaglesPopulation++;
+                        } else if (grid[w][h].getBackground() == Color.black) {
+                            giantsPopulation++;
+                        } else if (grid[w][h].getBackground() == Color.red) {
+                            cowboysPopulation++;
+                        } else if (grid[w][h].getBackground() == Color.blue) {
+                            commandersPopulation++;
+                        }
+                    }
+                }
+
+                int h = 10;
+                int w = 10;
+
+                int colorOne = 0;
+                int colorTwo = 0;
+
+                grid[w][h].setBackground(Color.GREEN);
+
+                grid[11][10].setBackground(Color.GREEN);
+                grid[11][9].setBackground(Color.BLACK);
+                grid[10][9].setBackground(Color.BLACK);
+                grid[9][9].setBackground(Color.BLACK);
+                grid[9][10].setBackground(Color.GREEN);
+                grid[9][11].setBackground(Color.BLACK);
+                grid[10][11].setBackground(Color.BLACK);
+                grid[11][11].setBackground(Color.GREEN);
+
+                checkNeighbors(w, h);
 
             }
         });
@@ -264,11 +402,15 @@ public class Main extends JFrame {
                     cowboysTextField.setVisible(true);
                     cowboysLabel.setVisible(true);
                     cowboysresultsLabel.setVisible(true);
+                    cowboystoleranceTextfield.setVisible(true);
+                    cowboystoleranceLabel.setVisible(true);
                 }
                 else {
                     cowboysTextField.setVisible(false);
                     cowboysLabel.setVisible(false);
                     cowboysresultsLabel.setVisible(false);
+                    cowboystoleranceTextfield.setVisible(false);
+                    cowboystoleranceLabel.setVisible(false);
                 }
             }
 
@@ -281,11 +423,67 @@ public class Main extends JFrame {
                     commandersTextField.setVisible(true);
                     commandersLabel.setVisible(true);
                     commandersresultsLabel.setVisible(true);
+                    commandtoleranceTextField.setVisible(true);
+                    commandtoleranceLabel.setVisible(true);
                 }
                 else {
                     commandersTextField.setVisible(false);
                     commandersLabel.setVisible(false);
                     commandersresultsLabel.setVisible(false);
+                    commandtoleranceTextField.setVisible(false);
+                    commandtoleranceLabel.setVisible(false);
+                }
+
+            }
+        });
+        universaltoleranceCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (universaltoleranceCheckBox.isSelected()) {
+                    universaltoleranceTextField.setVisible(true);
+                    universaltoleranceLabel.setVisible(true);
+                    eaglestoleranceTextField.setEditable(false);
+                    giantstoleranceTextField.setEditable(false);
+                    cowboystoleranceTextfield.setEditable(false);
+                    commandtoleranceTextField.setEditable(false);
+                    individualCheckbox.setEnabled(false);
+
+                }
+                else {
+                    universaltoleranceTextField.setVisible(false);
+                    universaltoleranceLabel.setVisible(false);
+                    eaglestoleranceTextField.setEditable(true);
+                    giantstoleranceTextField.setEditable(true);
+                    cowboystoleranceTextfield.setEditable(true);
+                    commandtoleranceTextField.setEditable(true);
+                    individualCheckbox.setEnabled(true);
+                }
+
+            }
+        });
+        individualCheckbox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (individualCheckbox.isSelected()) {
+                    universaltoleranceTextField.setVisible(true);
+                    universaltoleranceLabel.setVisible(true);
+                    eaglestoleranceTextField.setEditable(false);
+                    giantstoleranceTextField.setEditable(false);
+                    cowboystoleranceTextfield.setEditable(false);
+                    commandtoleranceTextField.setEditable(false);
+                    universaltoleranceCheckBox.setEnabled(false);
+                    universaltoleranceTextField.setVisible(false);
+                    universaltoleranceLabel.setVisible(false);
+
+                }
+                else {
+                    universaltoleranceTextField.setVisible(false);
+                    universaltoleranceLabel.setVisible(false);
+                    eaglestoleranceTextField.setEditable(true);
+                    giantstoleranceTextField.setEditable(true);
+                    cowboystoleranceTextfield.setEditable(true);
+                    commandtoleranceTextField.setEditable(true);
+                    universaltoleranceCheckBox.setEnabled(true);
                 }
 
             }
@@ -293,7 +491,8 @@ public class Main extends JFrame {
     }
 
     public static void main(String[] args) {
-        JFrame frame = new Main("Sprint 1");
+        JFrame frame = new ProjectGUI("Sprint 1");
+        frame.setBounds(450, 250, 1000, 500);
         frame.setVisible(true);
     }
 }

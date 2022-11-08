@@ -4,6 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 public class ProjectGUI extends JFrame {
@@ -24,17 +27,36 @@ public class ProjectGUI extends JFrame {
     int cowboysint;
     int commandint;
 
-    static int empty;
+    static List<JButton> emptyList = new ArrayList<>();
 
     public static void emptySpotList() {
 
         for (int width = 0; width < Width; width++) {
             for (int height = 0; height < Height; height++) {
-                if (grid[width][height].getBackground() == null) {
-
+                if (Objects.equals(grid[width][height].getBackground(), new Color(238, 238, 238))) {
+                    emptyList.add(grid[width][height]);
                 }
             }
         }
+
+        System.out.println("Number of empty spots is " + emptyList.size());
+    }
+
+    public static void moveToRandomSpot(int w, int h) {
+
+        Random random1 = new Random();
+
+        int size = emptyList.size();
+
+        int rand = random1.nextInt(size);
+
+        JButton g = emptyList.get(rand);
+
+        g.setBackground(grid[w][h].getBackground());
+
+        grid[w][h].setBackground(null);
+
+
     }
 
     public Component checkNeighbors(int width, int height) {
@@ -92,7 +114,7 @@ public class ProjectGUI extends JFrame {
 
 
         System.out.println("Friends: " + friends + "\n" +
-                           "Enemies: " + enemies);
+                "Enemies: " + enemies);
 
         return null;
     }
@@ -274,18 +296,33 @@ public class ProjectGUI extends JFrame {
                 int colorOne = 0;
                 int colorTwo = 0;
 
-                grid[w][h].setBackground(Color.GREEN);
+                emptySpotList();
 
-                grid[11][10].setBackground(Color.GREEN);
-                grid[11][9].setBackground(Color.BLACK);
-                grid[10][9].setBackground(Color.BLACK);
-                grid[9][9].setBackground(Color.BLACK);
-                grid[9][10].setBackground(Color.GREEN);
-                grid[9][11].setBackground(Color.BLACK);
-                grid[10][11].setBackground(Color.BLACK);
-                grid[11][11].setBackground(Color.GREEN);
+                grid[w][h].setBackground(Color.CYAN);
 
-                checkNeighbors(w, h);
+                moveToRandomSpot(w,h);
+//
+//                grid[w][h].setBackground(Color.GREEN);
+//
+//                try {
+//                    grid[w+1][h].setBackground(Color.GREEN);
+//                    grid[w+1][h-1].setBackground(Color.BLACK);
+//                    grid[w][h-1].setBackground(Color.BLACK);
+//                    grid[w][h-1].setBackground(Color.BLACK);
+//                    grid[w-1][h-1].setBackground(Color.BLACK);
+//                    grid[w-1][h].setBackground(Color.GREEN);
+//                    grid[w-1][h+1].setBackground(Color.BLACK);
+//                    grid[w][h+1].setBackground(Color.BLACK);
+//                    grid[w+1][h+1].setBackground(Color.GREEN);
+//
+//                    checkNeighbors(w, h);
+//
+//                } catch (Exception r) {
+//
+//                }
+
+                emptySpotList();
+
 
             }
         });

@@ -38,25 +38,17 @@ public class ProjectGUI extends JFrame {
                 }
             }
         }
-
         System.out.println("Number of empty spots is " + emptyList.size());
     }
 
     public static void moveToRandomSpot(int w, int h) {
-
         Random random1 = new Random();
 
-        int size = emptyList.size();
-
-        int rand = random1.nextInt(size);
-
+        int rand = random1.nextInt(emptyList.size());
         JButton g = emptyList.get(rand);
 
         g.setBackground(grid[w][h].getBackground());
-
         grid[w][h].setBackground(null);
-
-
     }
 
     public Component checkNeighbors(int width, int height) {
@@ -296,10 +288,9 @@ public class ProjectGUI extends JFrame {
                 int colorOne = 0;
                 int colorTwo = 0;
 
-                emptySpotList();
-
                 grid[w][h].setBackground(Color.CYAN);
 
+                emptySpotList();
                 moveToRandomSpot(w,h);
 //
 //                grid[w][h].setBackground(Color.GREEN);
@@ -320,8 +311,6 @@ public class ProjectGUI extends JFrame {
 //                } catch (Exception r) {
 //
 //                }
-
-                emptySpotList();
 
 
             }

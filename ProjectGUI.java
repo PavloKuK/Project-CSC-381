@@ -166,6 +166,11 @@ public class ProjectGUI extends JFrame {
     private JLabel commandtoleranceLabel;
     private JTextField universaltoleranceTextField;
     private JCheckBox individualCheckbox;
+    private JSlider preferenceSlider;
+    private JLabel preferenceLabel;
+    private JButton pauseButton;
+    private JLabel preferenceResult;
+    private JButton resetButton;
 
 
     public ProjectGUI(String title) {
@@ -191,6 +196,16 @@ public class ProjectGUI extends JFrame {
 
         commandtoleranceTextField.setVisible(false);
         commandtoleranceLabel.setVisible(false);
+ 
+        preferenceResult.setVisible(false);
+
+        preferenceSlider.setPaintLabels(true);
+        preferenceSlider.setPaintTicks(true);
+        preferenceSlider.setPaintTrack(true);
+
+        preferenceSlider.setMajorTickSpacing(25);
+        preferenceSlider.setMinorTickSpacing(5);
+
 
         submitButton.addActionListener(new ActionListener() {
             @Override
@@ -488,11 +503,79 @@ public class ProjectGUI extends JFrame {
 
             }
         });
-    }
+        preferenceSlider.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                int diversityDesire = preferenceSlider.getValue();
+                preferenceResult.setText("Preference for diversity of living is: " + diversityDesire + "%");
+                preferenceResult.setVisible(true);
+            }
+        });
+         pauseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
+            resetButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                preferenceSlider.setValue(50);
+                preferenceResult.setText("");
+                preferenceResult.setVisible(false);
 
-    public static void main(String[] args) {
-        JFrame frame = new ProjectGUI("Sprint 1");
-        frame.setBounds(450, 250, 1000, 500);
-        frame.setVisible(true);
+                eaglesTextField.setText("");
+                eaglesresultsLabel.setText("");
+                eaglesresultsLabel.setVisible(false);
+
+                giantsTextField.setText("");
+                giantsresultsLabel.setText("");
+                giantsresultsLabel.setVisible(false);
+
+                commandersTextField.setText("");
+                commandersresultsLabel.setText("");
+                commandersresultsLabel.setText("");
+
+                cowboysTextField.setText("");
+                cowboysresultsLabel.setText("");
+                cowboysresultsLabel.setVisible(false);
+
+                widthInput.setText("");
+                widthResultsLabel.setText("");
+                widthResultsLabel.setVisible(false);
+
+                heightInput.setText("");
+                heightResultsLabel.setText("");
+                heightResultsLabel.setVisible(false);
+
+                cowboysCheckBox.setSelected(false);
+                commandersCheckBox.setSelected(false);
+
+                commandtoleranceLabel.setVisible(false);
+                commandtoleranceTextField.setText("");
+                commandtoleranceTextField.setVisible(false);
+
+                cowboystoleranceTextfield.setText("");
+                cowboystoleranceTextfield.setVisible(false);
+                cowboystoleranceLabel.setVisible(false);
+
+                eaglestoleranceLabel.setText("");
+                eaglestoleranceTextField.setEditable(true);
+
+                universaltoleranceLabel.setVisible(false);
+                universaltoleranceTextField.setVisible(false);
+
+
+
+                if (universaltoleranceCheckBox.isSelected()){
+                    universaltoleranceCheckBox.setSelected(false);
+                }
+                if (individualCheckbox.isSelected()){
+                    individualCheckbox.setSelected(false);
+                }
+
+                timer.restart();
+            }
+        });
+        
     }
 }

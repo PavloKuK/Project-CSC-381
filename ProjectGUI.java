@@ -222,6 +222,8 @@ public class ProjectGUI extends JFrame {
     private JLabel giantsresultsLabel;
     private JButton submitButton;
     private JButton stopButton;
+    private JButton pauseButton;
+    private JButton resetButton;
     private JTextField widthInput;
     private JTextField heightInput;
     private JLabel widthLabel;
@@ -253,6 +255,9 @@ public class ProjectGUI extends JFrame {
     private JLabel giantstolerancevalueLabel;
     private JLabel cowboystolerancevalueLabel;
     private JLabel commandtolerancevalueLabel;
+
+    //creates timer for submit button
+    Timer timer = new Timer(0, submitButton.getAction());
 
 
     public ProjectGUI(String title) {
@@ -658,11 +663,68 @@ public class ProjectGUI extends JFrame {
                 commandtolerancevalueLabel.setText(String.valueOf(commandvalue) + " %");
             }
         });
-    }
+    resetButton.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            eaglesTextField.setText("");
+            eaglesresultsLabel.setText("");
+            eaglesresultsLabel.setVisible(false);
 
-    public static void main(String[] args) {
-        JFrame frame = new ProjectGUI("Sprint 1");
-        frame.setBounds(350, 250, 1300, 500);
-        frame.setVisible(true);
-    }
-}
+            giantsTextField.setText("");
+            giantsresultsLabel.setText("");
+            giantsresultsLabel.setVisible(false);
+
+            commandersTextField.setText("");
+            commandersresultsLabel.setText("");
+            commandersresultsLabel.setText("");
+
+            cowboysTextField.setText("");
+            cowboysresultsLabel.setText("");
+            cowboysresultsLabel.setVisible(false);
+
+            widthInput.setText("");
+            widthresultsLabel.setText("");
+            widthresultsLabel.setVisible(false);
+
+            heightInput.setText("");
+            heightsresultsLabel.setText("");
+            heightsresultsLabel.setVisible(false);
+
+            cowboysCheckBox.setSelected(false);
+            commandersCheckBox.setSelected(false);
+
+            commandtoleranceLabel.setVisible(false);
+            commandtolerancevalueLabel.setText("");
+            commanderstoleranceSlider.setValue(50);
+
+            cowboystoleranceSlider.setValue(50);
+            cowboystolerancevalueLabel.setText("");
+            commandtolerancevalueLabel.setVisible(false);
+
+            eaglestolerancevalueLabel.setText("");
+            eaglestoleranceSlider.setValue(50);
+            eaglestolerancevalueLabel.setVisible(false);
+
+            giantstoleranceSlider.setValue(50);
+            giantstolerancevalueLabel.setText("");
+            giantstolerancevalueLabel.setVisible(false);
+
+            universaltoleranceLabel.setVisible(false);
+            universaltoleranceSlider.setValue(50);
+
+
+            universaltoleranceCheckBox.setSelected(false);
+            individualCheckbox.setSelected(false);
+
+            //restarts timer
+            timer.restart();
+        }
+    });
+           pauseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //stops timer
+                timer.stop();
+            }
+        });
+  }

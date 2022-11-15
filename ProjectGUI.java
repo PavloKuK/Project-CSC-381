@@ -168,6 +168,11 @@ public class ProjectGUI extends JFrame {
     private JSlider cowboystoleranceSlider;
     private JSlider commanderstoleranceSlider;
     private JSlider giantstoleranceSlider;
+    private JLabel universalvalueLabel;
+    private JLabel eaglestolerancevalueLabel;
+    private JLabel giantstolerancevalueLabel;
+    private JLabel cowboystolerancevalueLabel;
+    private JLabel commandtolerancevalueLabel;
 
 
     public ProjectGUI(String title) {
@@ -187,12 +192,17 @@ public class ProjectGUI extends JFrame {
 
         universaltoleranceSlider.setVisible(false);
         universaltoleranceLabel.setVisible(false);
+        universalvalueLabel.setVisible(false);
 
         cowboystoleranceSlider.setVisible(false);
         cowboystoleranceLabel.setVisible(false);
+        cowboystolerancevalueLabel.setVisible(false);
 
         commanderstoleranceSlider.setVisible(false);
         commandtoleranceLabel.setVisible(false);
+        commandtolerancevalueLabel.setVisible(false);
+
+
 
         submitButton.addActionListener(new ActionListener() {
             @Override
@@ -406,6 +416,7 @@ public class ProjectGUI extends JFrame {
                     cowboysresultsLabel.setVisible(true);
                     cowboystoleranceSlider.setVisible(true);
                     cowboystoleranceLabel.setVisible(true);
+                    cowboystolerancevalueLabel.setVisible(true);
                 }
                 else {
                     cowboysTextField.setVisible(false);
@@ -413,6 +424,7 @@ public class ProjectGUI extends JFrame {
                     cowboysresultsLabel.setVisible(false);
                     cowboystoleranceSlider.setVisible(false);
                     cowboystoleranceLabel.setVisible(false);
+                    cowboystolerancevalueLabel.setVisible(true);
                 }
             }
 
@@ -427,6 +439,7 @@ public class ProjectGUI extends JFrame {
                     commandersresultsLabel.setVisible(true);
                     commanderstoleranceSlider.setVisible(true);
                     commandtoleranceLabel.setVisible(true);
+                    commandtolerancevalueLabel.setVisible(true);
                 }
                 else {
                     commandersTextField.setVisible(false);
@@ -434,6 +447,7 @@ public class ProjectGUI extends JFrame {
                     commandersresultsLabel.setVisible(false);
                     commanderstoleranceSlider.setVisible(false);
                     commandtoleranceLabel.setVisible(false);
+                    commandtolerancevalueLabel.setVisible(false);
                 }
 
             }
@@ -444,21 +458,31 @@ public class ProjectGUI extends JFrame {
                 if (universaltoleranceCheckBox.isSelected()) {
                     universaltoleranceSlider.setVisible(true);
                     universaltoleranceLabel.setVisible(true);
+                    universalvalueLabel.setVisible(true);
                     eaglestoleranceSlider.setEnabled(false);
                     giantstoleranceSlider.setEnabled(false);
                     cowboystoleranceSlider.setEnabled(false);
                     commanderstoleranceSlider.setEnabled(false);
                     individualCheckbox.setEnabled(false);
+                    eaglestolerancevalueLabel.setVisible(false);
+                    giantstolerancevalueLabel.setVisible(false);
+                    commandtolerancevalueLabel.setVisible(false);
+                    giantstolerancevalueLabel.setVisible(false);
 
                 }
                 else {
                     universaltoleranceSlider.setVisible(false);
                     universaltoleranceLabel.setVisible(false);
+                    universalvalueLabel.setVisible(false);
                     eaglestoleranceSlider.setEnabled(true);
                     giantstoleranceSlider.setEnabled(true);
                     cowboystoleranceSlider.setEnabled(true);
                     commanderstoleranceSlider.setEnabled(true);
                     individualCheckbox.setEnabled(true);
+                    eaglestolerancevalueLabel.setVisible(true);
+                    giantstolerancevalueLabel.setVisible(true);
+                    commandtolerancevalueLabel.setVisible(true);
+                    giantstolerancevalueLabel.setVisible(true);
                 }
 
             }
@@ -467,25 +491,26 @@ public class ProjectGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (individualCheckbox.isSelected()) {
-                    universaltoleranceSlider.setVisible(true);
-                    universaltoleranceLabel.setVisible(true);
                     eaglestoleranceSlider.setEnabled(false);
                     giantstoleranceSlider.setEnabled(false);
                     cowboystoleranceSlider.setEnabled(false);
                     commanderstoleranceSlider.setEnabled(false);
                     universaltoleranceCheckBox.setEnabled(false);
-                    universaltoleranceSlider.setVisible(false);
-                    universaltoleranceLabel.setVisible(false);
-
+                    eaglestolerancevalueLabel.setVisible(false);
+                    giantstolerancevalueLabel.setVisible(false);
+                    commandtolerancevalueLabel.setVisible(false);
+                    giantstolerancevalueLabel.setVisible(false);
                 }
                 else {
-                    universaltoleranceSlider.setVisible(false);
-                    universaltoleranceLabel.setVisible(false);
                     eaglestoleranceSlider.setEnabled(true);
                     giantstoleranceSlider.setEnabled(true);
                     cowboystoleranceSlider.setEnabled(true);
                     commanderstoleranceSlider.setEnabled(true);
                     universaltoleranceCheckBox.setEnabled(true);
+                    eaglestolerancevalueLabel.setVisible(true);
+                    giantstolerancevalueLabel.setVisible(true);
+                    commandtolerancevalueLabel.setVisible(true);
+                    giantstolerancevalueLabel.setVisible(true);
                 }
 
             }
@@ -493,31 +518,36 @@ public class ProjectGUI extends JFrame {
         universaltoleranceSlider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-
+                int universalvalue = universaltoleranceSlider.getValue();
+                universalvalueLabel.setText(String.valueOf(universalvalue) + " %");
             }
         });
         eaglestoleranceSlider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-
+                int eaglesvalue = eaglestoleranceSlider.getValue();
+                eaglestolerancevalueLabel.setText(String.valueOf(eaglesvalue) + " %");
             }
         });
         giantstoleranceSlider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-
+                int giantsvalue = giantstoleranceSlider.getValue();
+                giantstolerancevalueLabel.setText(String.valueOf(giantsvalue) + " %");
             }
         });
         cowboystoleranceSlider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-
+                int cowboysvalue = cowboystoleranceSlider.getValue();
+                cowboystolerancevalueLabel.setText(String.valueOf(cowboysvalue) + " %");
             }
         });
         commanderstoleranceSlider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-
+                int commandvalue = commanderstoleranceSlider.getValue();
+                commandtolerancevalueLabel.setText(String.valueOf(commandvalue) + " %");
             }
         });
     }

@@ -1,14 +1,15 @@
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Random;
+import java.util.Objects;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.Random;
-
 
 public class ProjectGUI extends JFrame {
     static JFrame frame = new JFrame(); // creates frame
@@ -16,6 +17,8 @@ public class ProjectGUI extends JFrame {
 
     static int Width;
     static int Height;
+    static Random random = new Random();
+
     String eaglespop;
     String giantspop;
     String cowboyspop;
@@ -26,7 +29,14 @@ public class ProjectGUI extends JFrame {
     int cowboysint;
     int commandint;
 
+    static int UniversaltoleranceSlider;
+    static int EaglestoleranceSlider;
+    static int CowboystoleranceSlider;
+    static int CommanderstoleranceSlider;
+    static int GiantstoleranceSlider;
+
     static List<JButton> emptyList = new ArrayList<>();
+    static List<Boolean> tolerance = new ArrayList<>();
 
     static int clicks = 0;
 
@@ -69,11 +79,12 @@ public class ProjectGUI extends JFrame {
         emptyList.add(grid[w][h]);
     }
 
-    public Component checkNeighbors(int width, int height) {
+    public double checkNeighbors(int width, int height) {
 
-        int friends = 0;
-        int enemies = 0;
-        int empty = 0;
+        double friends = 0;
+        double enemies = 0;
+        double empty = 0;
+        double enemiesPercentage;
 
         if (indexExist(width+1, height)) {
             if (grid[width][height].getBackground() == grid[width+1][height].getBackground()) {
@@ -160,39 +171,36 @@ public class ProjectGUI extends JFrame {
                 "Enemies: " + enemies + "\n" +
                 "Empty: " + empty);
 
-        return null;
+
+        enemiesPercentage = 100 / (enemies + friends) * enemies;
+
+        System.out.println(enemiesPercentage);
+
+        return enemiesPercentage;
     }
 
-    public static Component newFrame() {
-        frame.setLayout(new GridLayout(Width, Height)); // set layout
+    public Component Grid(int width, int height) { // constructor
+        frame.setLayout(new GridLayout(width, height)); // set layout
         frame.setBounds(350, 250, 250, 500);
-        return null;
-    }
-    public Component Grid() { // constructor
-        if (clicks > 1) {
-            return null;
-        }
-
-        grid = new JButton[Width][Height]; // allocate the size of grid
-        Random random = new Random();
+        grid = new JButton[width][height]; // allocate the size of grid
         int rand;
-        for (int y = 0; y < Height; y++) {
-            for (int x = 0; x < Width; x++) {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
                 grid[x][y] = new JButton(); // creates new button
                 frame.add(grid[x][y]); // adds button to grid
 
                 rand = random.nextInt(100);
 
-                if ((0 < rand) && (rand < eaglesint)) {
+                if ((0 < rand) && (rand <= eaglesint)) {
                     grid[x][y].setBackground(Color.green);
 
-                } else if ((eaglesint < rand) && (rand < eaglesint + giantsint)) {
+                } else if ((eaglesint <= rand) && (rand < eaglesint + giantsint)) {
                     grid[x][y].setBackground(Color.black);
 
-                } else if ((eaglesint < rand) && (rand < eaglesint + giantsint + cowboysint)) {
+                } else if ((eaglesint <= rand) && (rand < eaglesint + giantsint + cowboysint)) {
                     grid[x][y].setBackground(Color.red);
 
-                } else if ((eaglesint < rand) && (rand < eaglesint + giantsint + cowboysint + commandint)) {
+                } else if ((eaglesint <= rand) && (rand < eaglesint + giantsint + cowboysint + commandint)) {
                     grid[x][y].setBackground(Color.blue);
                 }
 
@@ -230,16 +238,17 @@ public class ProjectGUI extends JFrame {
     private JLabel widthresultsLabel;
     private JCheckBox universaltoleranceCheckBox;
     private JLabel universaltoleranceLabel;
-    private JTextField eaglestoleranceTextField;
     private JLabel eaglestoleranceLabel;
-    private JTextField cowboystoleranceTextfield;
     private JLabel cowboystoleranceLabel;
-    private JTextField giantstoleranceTextField;
-    private JTextField commandtoleranceTextField;
     private JLabel giantstoleranceLabel;
     private JLabel commandtoleranceLabel;
-    private JTextField universaltoleranceTextField;
     private JCheckBox individualCheckbox;
+    private JSlider universaltoleranceSlider;
+    private JSlider eaglestoleranceSlider;
+    private JSlider cowboystoleranceSlider;
+    private JSlider commanderstoleranceSlider;
+    private JSlider giantstoleranceSlider;
+
 
     public ProjectGUI(String title) {
         super(title);
@@ -256,13 +265,13 @@ public class ProjectGUI extends JFrame {
         commandersLabel.setVisible(false);
         commandersresultsLabel.setVisible(false);
 
-        universaltoleranceTextField.setVisible(false);
+        universaltoleranceSlider.setVisible(false);
         universaltoleranceLabel.setVisible(false);
 
-        cowboystoleranceTextfield.setVisible(false);
+        cowboystoleranceSlider.setVisible(false);
         cowboystoleranceLabel.setVisible(false);
 
-        commandtoleranceTextField.setVisible(false);
+        commanderstoleranceSlider.setVisible(false);
         commandtoleranceLabel.setVisible(false);
 
         submitButton.addActionListener(new ActionListener() {
@@ -282,6 +291,12 @@ public class ProjectGUI extends JFrame {
                 commandint = Integer.parseInt(commandpop);
                 int widthint = Integer.parseInt(width);
                 int heightint = Integer.parseInt(height);
+
+                UniversaltoleranceSlider = universaltoleranceSlider.getValue();
+                EaglestoleranceSlider = eaglestoleranceSlider.getValue();
+                CowboystoleranceSlider = cowboystoleranceSlider.getValue();
+                CommanderstoleranceSlider = commanderstoleranceSlider.getValue();
+                GiantstoleranceSlider = giantstoleranceSlider.getValue();
 
                 // eagles
                 if (eaglesint < 1 || eaglesint > 99) {
@@ -334,10 +349,26 @@ public class ProjectGUI extends JFrame {
                     Width = Integer.parseInt(width);
                     Height = Integer.parseInt(height);
                     //Creates Grid
-                    newFrame();
-                    Grid();
+
+                    if(clicks > 1) {
+                        return;
+                    } else {
+                        Grid(Width, Height);
+                    }
                 } catch (Exception E) {
                     System.out.println("Got an exception");
+                }
+
+                boolean universalChecked = universaltoleranceCheckBox.isSelected();
+
+                if (clicks > 2) {
+                    for(int i = 0; i < Width; i++) {
+                        for(int j = 0; j < Height; j++) {
+                            if (!Objects.equals(grid[i][j].getBackground(), new Color(238, 238, 238))) {
+
+                            }
+                        }
+                    }
                 }
 
                 int eaglesPopulation = 0;
@@ -367,14 +398,26 @@ public class ProjectGUI extends JFrame {
                 int h = 10;
                 int w = 10;
 
-                grid[w][h].setBackground(Color.GREEN);
+                int colorOne = 0;
+                int colorTwo = 0;
 
-                checkNeighbors(w, h);
+//                grid[w][h].setBackground(Color.GREEN);
+//
+//                grid[11][10].setBackground(Color.GREEN);
+//                grid[11][9].setBackground(Color.BLACK);
+//                grid[10][9].setBackground(Color.BLACK);
+//                grid[9][9].setBackground(Color.BLACK);
+//                grid[9][10].setBackground(Color.GREEN);
+//                grid[9][11].setBackground(Color.BLACK);
+//                grid[10][11].setBackground(Color.BLACK);
+//                grid[11][11].setBackground(Color.GREEN);
+//
+//                emptySpotList();
+//
+//                checkNeighbors(w, h);
+////                moveToRandomSpot(10,10);
 
-                grid[20][20].setBackground(Color.CYAN);
-                emptySpotList();
 
-                moveToRandomSpot(20,20);
             }
         });
         eaglesTextField.addKeyListener(new KeyAdapter() {
@@ -469,14 +512,14 @@ public class ProjectGUI extends JFrame {
                     cowboysTextField.setVisible(true);
                     cowboysLabel.setVisible(true);
                     cowboysresultsLabel.setVisible(true);
-                    cowboystoleranceTextfield.setVisible(true);
+                    cowboystoleranceSlider.setVisible(true);
                     cowboystoleranceLabel.setVisible(true);
                 }
                 else {
                     cowboysTextField.setVisible(false);
                     cowboysLabel.setVisible(false);
                     cowboysresultsLabel.setVisible(false);
-                    cowboystoleranceTextfield.setVisible(false);
+                    cowboystoleranceSlider.setVisible(false);
                     cowboystoleranceLabel.setVisible(false);
                 }
             }
@@ -490,14 +533,14 @@ public class ProjectGUI extends JFrame {
                     commandersTextField.setVisible(true);
                     commandersLabel.setVisible(true);
                     commandersresultsLabel.setVisible(true);
-                    commandtoleranceTextField.setVisible(true);
+                    commanderstoleranceSlider.setVisible(true);
                     commandtoleranceLabel.setVisible(true);
                 }
                 else {
                     commandersTextField.setVisible(false);
                     commandersLabel.setVisible(false);
                     commandersresultsLabel.setVisible(false);
-                    commandtoleranceTextField.setVisible(false);
+                    commanderstoleranceSlider.setVisible(false);
                     commandtoleranceLabel.setVisible(false);
                 }
 
@@ -507,22 +550,22 @@ public class ProjectGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (universaltoleranceCheckBox.isSelected()) {
-                    universaltoleranceTextField.setVisible(true);
+                    universaltoleranceSlider.setVisible(true);
                     universaltoleranceLabel.setVisible(true);
-                    eaglestoleranceTextField.setEditable(false);
-                    giantstoleranceTextField.setEditable(false);
-                    cowboystoleranceTextfield.setEditable(false);
-                    commandtoleranceTextField.setEditable(false);
+                    eaglestoleranceSlider.setEnabled(false);
+                    giantstoleranceSlider.setEnabled(false);
+                    cowboystoleranceSlider.setEnabled(false);
+                    commanderstoleranceSlider.setEnabled(false);
                     individualCheckbox.setEnabled(false);
 
                 }
                 else {
-                    universaltoleranceTextField.setVisible(false);
+                    universaltoleranceSlider.setVisible(false);
                     universaltoleranceLabel.setVisible(false);
-                    eaglestoleranceTextField.setEditable(true);
-                    giantstoleranceTextField.setEditable(true);
-                    cowboystoleranceTextfield.setEditable(true);
-                    commandtoleranceTextField.setEditable(true);
+                    eaglestoleranceSlider.setEnabled(true);
+                    giantstoleranceSlider.setEnabled(true);
+                    cowboystoleranceSlider.setEnabled(true);
+                    commanderstoleranceSlider.setEnabled(true);
                     individualCheckbox.setEnabled(true);
                 }
 
@@ -532,26 +575,56 @@ public class ProjectGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (individualCheckbox.isSelected()) {
-                    universaltoleranceTextField.setVisible(true);
+                    universaltoleranceSlider.setVisible(true);
                     universaltoleranceLabel.setVisible(true);
-                    eaglestoleranceTextField.setEditable(false);
-                    giantstoleranceTextField.setEditable(false);
-                    cowboystoleranceTextfield.setEditable(false);
-                    commandtoleranceTextField.setEditable(false);
+                    eaglestoleranceSlider.setEnabled(false);
+                    giantstoleranceSlider.setEnabled(false);
+                    cowboystoleranceSlider.setEnabled(false);
+                    commanderstoleranceSlider.setEnabled(false);
                     universaltoleranceCheckBox.setEnabled(false);
-                    universaltoleranceTextField.setVisible(false);
+                    universaltoleranceSlider.setVisible(false);
                     universaltoleranceLabel.setVisible(false);
 
                 }
                 else {
-                    universaltoleranceTextField.setVisible(false);
+                    universaltoleranceSlider.setVisible(false);
                     universaltoleranceLabel.setVisible(false);
-                    eaglestoleranceTextField.setEditable(true);
-                    giantstoleranceTextField.setEditable(true);
-                    cowboystoleranceTextfield.setEditable(true);
-                    commandtoleranceTextField.setEditable(true);
+                    eaglestoleranceSlider.setEnabled(true);
+                    giantstoleranceSlider.setEnabled(true);
+                    cowboystoleranceSlider.setEnabled(true);
+                    commanderstoleranceSlider.setEnabled(true);
                     universaltoleranceCheckBox.setEnabled(true);
                 }
+
+            }
+        });
+        universaltoleranceSlider.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+
+            }
+        });
+        eaglestoleranceSlider.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+
+            }
+        });
+        giantstoleranceSlider.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+
+            }
+        });
+        cowboystoleranceSlider.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+
+            }
+        });
+        commanderstoleranceSlider.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
 
             }
         });
@@ -559,7 +632,7 @@ public class ProjectGUI extends JFrame {
 
     public static void main(String[] args) {
         JFrame frame = new ProjectGUI("Sprint 1");
-        frame.setBounds(330, 200, 1250, 500);
+        frame.setBounds(350, 250, 1300, 500);
         frame.setVisible(true);
     }
 }

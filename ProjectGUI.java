@@ -446,35 +446,6 @@ public class ProjectGUI extends JFrame {
                     }
                 }
 
-                int eaglesPopulation = 0;
-                int giantsPopulation = 0;
-                int cowboysPopulation = 0;
-                int commandersPopulation = 0;
-
-                double eaglePercent = 0;
-                double giantPercent = 0;
-                double cowboysPercent = 0;
-                double commandersPercent = 0;
-
-                for (int h = 0; h < Height; h++) {
-                    for (int w = 0; w < Width; w++) {
-                        if(grid[w][h].getBackground() == Color.green) {
-                            eaglesPopulation++;
-                        } else if (grid[w][h].getBackground() == Color.black) {
-                            giantsPopulation++;
-                        } else if (grid[w][h].getBackground() == Color.red) {
-                            cowboysPopulation++;
-                        } else if (grid[w][h].getBackground() == Color.blue) {
-                            commandersPopulation++;
-                        }
-                    }
-                }
-
-                int h = 10;
-                int w = 10;
-
-                int colorOne = 0;
-                int colorTwo = 0;
                 
                 //Morgan - checks which tolerance checkbox was checked off and then proceed from there, but wasn't able to figure out how to handle the tolerance levels - 10c
 /*                if (universaltoleranceCheckBox.isSelected()){
@@ -488,22 +459,6 @@ public class ProjectGUI extends JFrame {
                     commandTolerance;
                     cowboysTolerance
                 }*/
-
-//                grid[w][h].setBackground(Color.GREEN);
-//
-//                grid[11][10].setBackground(Color.GREEN);
-//                grid[11][9].setBackground(Color.BLACK);
-//                grid[10][9].setBackground(Color.BLACK);
-//                grid[9][9].setBackground(Color.BLACK);
-//                grid[9][10].setBackground(Color.GREEN);
-//                grid[9][11].setBackground(Color.BLACK);
-//                grid[10][11].setBackground(Color.BLACK);
-//                grid[11][11].setBackground(Color.GREEN);
-//
-//                emptySpotList();
-//
-//                checkNeighbors(w, h);
-////                moveToRandomSpot(10,10);
 
 
             }

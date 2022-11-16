@@ -28,6 +28,9 @@ public class ProjectGUI extends JFrame {
     int giantsint;
     int cowboysint;
     int commandint;
+    
+    //Morgan - 10c. created a global variable that the entirety of ProjectGUI.java could call to
+    //int toleranceBound = 100;
 
     static int UniversaltoleranceSlider;
     static int EaglestoleranceSlider;
@@ -178,6 +181,62 @@ public class ProjectGUI extends JFrame {
 
         return enemiesPercentage;
     }
+    
+//Morgan - for 10c, I thought I could try and place teams in certain quadrants of the sprint, but struggled with logic behind it, and realized it is not a good way to go about completing it.
+/*    public Component newGrid (int width, int height){
+        frame.setLayout(new GridLayout(width, height)); // set layout
+        frame.setBounds(350, 250, 250, 500);
+        grid = new JButton[width][height]; // allocate the size of grid
+        int rand;
+
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                grid[x][y] = new JButton(); // creates new button
+                frame.add(grid[x][y]); // adds button to grid
+
+                rand = random.nextInt(toleranceBound);
+
+                int e;
+                int g;
+                int c;
+                int co;
+                int he;
+                int gh;
+                int ch;
+                int coh;
+
+                e = width / 4;
+                g = width / 4;
+                c = width / 4;
+                co = width / 4;
+
+                coh = height / 4;
+                gh = height / 4;
+                he = height / 4;
+                ch = height / 4;
+
+
+                if ((0 < rand) && (rand < eaglesint)) {
+                    grid[e][he].setBackground(Color.green);
+
+                } else if ((eaglesint < rand) && (rand < eaglesint + giantsint)) {
+                    grid[g][gh].setBackground(Color.black);
+
+                } else if ((eaglesint < rand) && (rand < eaglesint + giantsint + cowboysint)) {
+                    grid[c][coh].setBackground(Color.red);
+
+                } else if ((eaglesint < rand) && (rand < eaglesint + giantsint + cowboysint + commandint)) {
+                    grid[co][ch].setBackground(Color.blue);
+                }
+
+            }
+
+        }
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack(); // sets appropriate size for frame
+        frame.setVisible(true); // makes frame visible
+        return null;
+    }*/
 
     public Component Grid(int width, int height) { // constructor
         frame.setLayout(new GridLayout(width, height)); // set layout
@@ -188,6 +247,9 @@ public class ProjectGUI extends JFrame {
             for (int x = 0; x < width; x++) {
                 grid[x][y] = new JButton(); // creates new button
                 frame.add(grid[x][y]); // adds button to grid
+                
+                //Morgan - tried to make the tolerance level affect randomization, but realized it wouldn't work for 10c
+                //rand = random.nextInt(toleranceBound);
 
                 rand = random.nextInt(100);
 
@@ -413,6 +475,19 @@ public class ProjectGUI extends JFrame {
 
                 int colorOne = 0;
                 int colorTwo = 0;
+                
+                //Morgan - checks which tolerance checkbox was checked off and then proceed from there, but wasn't able to figure out how to handle the tolerance levels - 10c
+/*                if (universaltoleranceCheckBox.isSelected()){
+                    checkNeighbors(Width, Height);
+                    toleranceBound = universalTolerance;
+                }
+                if (individualCheckbox.isSelected()){
+                    checkNeighbors(Width, Height);
+                    eaglesTolerance;
+                    giantsTolerance;
+                    commandTolerance;
+                    cowboysTolerance
+                }*/
 
 //                grid[w][h].setBackground(Color.GREEN);
 //

@@ -758,3 +758,9 @@ public class ProjectGUI extends JFrame {
             }
         });
   }
+    public static void main(String[] args) {
+        JFrame frame = new ProjectGUI("Sprint 1");
+        frame.setBounds(350, 250, 1300, 500);
+        frame.setVisible(true);
+    }
+}
